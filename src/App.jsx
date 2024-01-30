@@ -25,6 +25,7 @@ function App() {
   const [totalPage, setTotalPage] = useState('');
 
   const baseUrl = "https://api.unsplash.com/search/photos";
+
   const options = {
     headers: {
       Authorization: `Client-ID ${import.meta.env.VITE_UNSPLASH_KEY}`
@@ -36,7 +37,8 @@ function App() {
     }
   };
 
-  const getPhotoData = () => {
+  const getPhotoData = (e) => {
+    e.preventDefault();
     axios
     .get(baseUrl, options)
     .then(
@@ -44,7 +46,6 @@ function App() {
         setPhoto(res.data.results)
         setTotalPage(res.data.total_pages)
     })
-    .catch(err => alert('Error!'))
   }
 
   useEffect(() => {
