@@ -33,7 +33,6 @@ function App() {
     params: {
       query: keyword,
       page: pageCount,
-      color: 'black_and_white',
       per_page: 30
     }
   };
