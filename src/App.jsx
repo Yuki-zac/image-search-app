@@ -24,7 +24,7 @@ function App() {
   const [pageCount, setPageCount] = useState(1);
   const [totalPage, setTotalPage] = useState('');
 
-  const baseUrl = "https://api.unsplash.com/search/photos";
+  const baseUrl = "https://api.unsplash.com/search/photos?";
 
   const options = {
     headers: {
