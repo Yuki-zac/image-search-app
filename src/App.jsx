@@ -27,7 +27,7 @@ function App() {
   const baseUrl = "https://api.unsplash.com/search/photos";
   const options = {
     headers: {
-      Authorization: `Client-ID ${import.meta.env.VITE_UNSPLASH_KEY}/`
+      Authorization: `Client-ID ${import.meta.env.VITE_UNSPLASH_KEY}`
     },
     params: {
       query: keyword,
