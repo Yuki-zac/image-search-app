@@ -37,7 +37,7 @@ function App() {
     }
   };
 
-  const getPhotoData = (e) => {
+  const getPhotoData = () => {
     axios
     .get(baseUrl, options)
     .then(
@@ -45,11 +45,12 @@ function App() {
         setPhoto(res.data.results)
         setTotalPage(res.data.total_pages)
     })
+    .catch(err => alert('Error!'));
   }
 
   useEffect(() => {
     getPhotoData();
-  },[keyword])
+  },[])
 
   const searchPhoto = (e) => {
     e.preventDefault();
