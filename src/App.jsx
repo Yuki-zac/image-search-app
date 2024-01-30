@@ -5,7 +5,7 @@ import Form from './components/Form'
 import Results from './components/Results'
 import Pagination from './components/Pagination';
 import './App.css'
- 
+
 function App() {
   const defaultKeyword = [
     'flower',
@@ -26,51 +26,45 @@ function App() {
 
   const baseUrl = "https://api.unsplash.com/search/photos";
 
-  const options = {
-    headers: {
-      Authorization: `Client-ID ${import.meta.env.VITE_UNSPLASH_KEY}`
-    },
-    params: {
-      query: keyword,
-      page: pageCount,
-      per_page: 30
-    }
-  };
+  const getPhotoData = async () => {
+    try {
+      const options = {
+        headers: {
+          Authorization: `Client-ID ${import.meta.env.VITE_UNSPLASH_KEY}`
+        },
+        params: {
+          query: keyword,
+          page: pageCount,
+          per_page: 30
+        }
+      };
 
-  const getPhotoData = () => {
-    axios
-    .get(baseUrl, options)
-    .then(
-      res => {
-        setPhoto(res.data.results)
-        setTotalPage(res.data.total_pages)
-    })
-    .catch(err => alert('Error!'));
+      const res = await axios.get(baseUrl, options);
+
+      setPhoto(res.data.results);
+      setTotalPage(res.data.total_pages);
+    } catch (err) {
+      alert('Error!');
+    }
   }
 
   useEffect(() => {
     getPhotoData();
-  },[])
+  }, [keyword, pageCount]); // 依存配列に keyword と pageCount を追加
 
   const searchPhoto = (e) => {
     e.preventDefault();
     setPageCount(1);
-    options.params.page = 1;
-    getPhotoData();
   }
 
   const pageIncrement = () => {
-    const newPageCount = pageCount + 1;
-    setPageCount(newPageCount);
-    options.params.page = newPageCount;
-    getPhotoData();
+    setPageCount(pageCount + 1);
   }
 
   const pageDecrement = () => {
-    const newPageCount = pageCount - 1;
-    setPageCount(newPageCount);
-    options.params.page = newPageCount;
-    getPhotoData();
+    if (pageCount > 1) {
+      setPageCount(pageCount - 1);
+    }
   }
 
   return (
@@ -87,5 +81,5 @@ function App() {
     </div>
   )
 }
- 
-export default App
+
+export default App;
