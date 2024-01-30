@@ -38,7 +38,6 @@ function App() {
   };
 
   const getPhotoData = (e) => {
-    e.preventDefault();
     axios
     .get(baseUrl, options)
     .then(
@@ -50,7 +49,7 @@ function App() {
 
   useEffect(() => {
     getPhotoData();
-  },[])
+  },[keyword])
 
   const searchPhoto = (e) => {
     e.preventDefault();
